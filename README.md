@@ -55,6 +55,7 @@ To generate a sitemap you would for example call:
 
 and a few seconds later you'll hopefully find you sitemap with 50 urls (max) in `/tmp/sitemap.xml`!
 
+Put that in a cron job and your sitemap will stay up-to-date :)
 
 
 ## Multiuser Instances
