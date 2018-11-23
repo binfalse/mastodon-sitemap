@@ -61,7 +61,7 @@ while toots and counter < args.max_urls:
 			continue
 		
 		# add to sitemap
-		sitemap.add(toot.url, lastmod=toot.created_at)
+		sitemap.add(toot.url, lastmod=toot.created_at.isoformat())
 		counter += 1
 		
 		# break if we saw enough...
