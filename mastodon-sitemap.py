@@ -57,7 +57,7 @@ counter = 1
 while toots and counter < args.max_urls:
 	for toot in toots:
 		# only consider public toots
-		if status.reblog or toot.visibility != "public":
+		if toot.reblog or toot.visibility != "public":
 			continue
 		
 		# add to sitemap
