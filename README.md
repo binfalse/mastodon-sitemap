@@ -1,10 +1,8 @@
 # Mastodon Sitemap Generator
 
-This is a [Python](https://www.python.org/) tool to generate an [XML sitemap](https://en.wikipedia.org/wiki/Sitemaps) for a single [Mastodon](https://en.wikipedia.org/wiki/Mastodon_(software)) account.
-It is, thus, primarily made for single-user installations.
-If your on a multiuser instance, you can still create your sitemap. You just cannot put it in the webservers root directory.. (maybe you have some other place to point search engines to it..?)
-In general, it would also be possible to create an individual sitemap per user and have a sitemap index listing all user-specific sitemaps..
-However, even that would probably only be feasible on instances with just a few users...
+This is a [Python](https://www.python.org/) tool to generate an [XML sitemap](https://en.wikipedia.org/wiki/Sitemaps) for [Mastodon](https://en.wikipedia.org/wiki/Mastodon_(software)).
+By default, it will create a sitemap for a specific user, but it can as well be used to generate a sitemap for the toots of all local users.
+
 
 
 ## Requirements
@@ -43,14 +41,15 @@ The sitemap generator accepts the following arguments:
 * `--access-token TOKEN` the cryptic string from the application that you created in your Mastodon backend
 * `--max-urls NUM` the number of urls to include in the sitemap (defaults to 1000)
 * `--overwrite` to force the generator to overwrite the sitemap file if it already exists
+* `--whole-instance` will create a sitemap for the whole instance (otherwise you'll get a sitemap for the toots of the current user)
 * and finally the file in which to store the sitemap (use `-` to print the sitemap to std out)
 
 To generate a sitemap you would for example call:
 
-    python3 mastodon-sitemap.py --instance https://mstdn.binfalse.de
-                                --access-token f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2 
-                                --max-urls 50
-                                --overwrite
+    python3 mastodon-sitemap.py --instance https://mstdn.binfalse.de        \
+                                --access-token f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2 \
+                                --max-urls 50                               \
+                                --overwrite                                 \
                                 /tmp/sitemap.xml
 
 and a few seconds later you'll hopefully find you sitemap with 50 urls (max) in `/tmp/sitemap.xml`!
@@ -58,11 +57,6 @@ and a few seconds later you'll hopefully find you sitemap with 50 urls (max) in 
 Put that in a cron job and your sitemap will stay up-to-date :)
 
 
-## Multiuser Instances
-
-If you're a user on a multiuser instance, you can of course still generate your sitemap.
-You just cannot put the sitemap on the root of the webserver..
-Not sure if it can still be useful for you? You may 
 
 
 
