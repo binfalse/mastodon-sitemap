@@ -38,6 +38,7 @@ The sitemap generator accepts the following arguments:
 * `--max-urls NUM` the number of urls to include in the sitemap (defaults to 1000)
 * `--overwrite` to force the generator to overwrite the sitemap file if it already exists
 * `--whole-instance` will create a sitemap for the whole instance (otherwise you'll get a sitemap for the toots of the current user), this sitemap will contain the latest toots from the local timeline and the distinct users who wrote it
+* `--proper-lastmod` properly check when a toot-page was last modified (aka when was the last reply to that toot? by default we set lastmod to the creation date of the toot) - please keep in mind, that this *significantly increases the performance,* as we need an extra API call for every single toot!
 * and finally the file in which to store the sitemap (use `-` to print the sitemap to std out)
 
 To generate a sitemap you would for example call:

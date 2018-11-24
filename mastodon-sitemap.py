@@ -32,6 +32,7 @@ parser.add_argument ('--access-token', required=True, help='token providing acce
 parser.add_argument ('--max-urls', type=int, default=1000, help='max number of urls to collect in the sitemap')
 parser.add_argument ('--overwrite', action='store_true', help='overwrite sitemap if it exists')
 parser.add_argument ('--whole-instance', action='store_true', help='create sitemap for all users on that instance')
+parser.add_argument ('--proper-lastmod', action='store_true', help='properly check when a toot-page was last modified (aka when was the last reply to that toot?) - please keep in mind, that this significantly increases the performance, as we need an extra API call for every single toot!')
 parser.add_argument ('file', metavar='FILE', help='file to store the sitemap, use - for std out')
 args = parser.parse_args()
 
@@ -89,8 +90,17 @@ while toots and counter < args.max_urls:
 		if toot.reblog or toot.visibility != "public":
 			continue
 		
+		# find when it was last modified
+		lm = toot.created_at
+		if args.proper_lastmod:
+			context = mstdn.status_context (toot.id)
+			if context.descendants:
+				for desc in context.descendants:
+					if lm < desc.created_at:
+						lm = desc.created_at
+		
 		# add to sitemap
-		sitemap.add(toot.url, lastmod=toot.created_at.isoformat())
+		sitemap.add(toot.url, lastmod=lm.isoformat())
 		counter += 1
 		
 		if toot.account.url not in users:
