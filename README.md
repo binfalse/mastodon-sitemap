@@ -59,10 +59,10 @@ There is a Docker image available at [binfalse/mastodon-sitemap](https://hub.doc
 
 To generate a sitemap in `/path/to/sitemap.xml` you would call:
 
-     docker run --rm -ti -v /path/to:/stuff binfalse/mastodon-sitemap
-                --instance https://mstdn.binfalse.de
-                --access-token f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2-
-                --overwrite
+     docker run --rm -ti -v /path/to:/stuff binfalse/mastodon-sitemap                           \
+                --instance https://mstdn.binfalse.de                                            \
+                --access-token f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2 \
+                --overwrite                                                                     \
                 /stuff/sitemap.xml
 
 
