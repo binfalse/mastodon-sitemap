@@ -11,6 +11,7 @@ parser.add_argument ('--instance', required=True, help='url to your instance')
 parser.add_argument ('--access-token', required=True, help='token providing access to your account')
 parser.add_argument ('--max-urls', type=int, default=1000, help='max number of urls to collect in the sitemap')
 parser.add_argument ('--overwrite', action='store_true', help='overwrite sitemap if it exists')
+parser.add_argument ('--whole-instance', action='store_true', help='create sitemap for all users on that instance')
 parser.add_argument ('file', metavar='FILE', help='file to store the sitemap, use - for std out')
 args = parser.parse_args()
 
@@ -50,7 +51,10 @@ sitemap.add(user.url,
             priority="1.0")
 
 # collect first bunch of toots
-toots = mstdn.account_statuses(user.id);
+if args.whole_instance:
+    toots = mstdn.timeline_local ();
+else:
+    toots = mstdn.account_statuses (user.id);
 counter = 1
 
 # iterate toots
