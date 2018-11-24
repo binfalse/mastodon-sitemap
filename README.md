@@ -37,7 +37,7 @@ The sitemap generator accepts the following arguments:
 * `--access-token TOKEN` the cryptic string from the application that you created in your Mastodon backend
 * `--max-urls NUM` the number of urls to include in the sitemap (defaults to 1000)
 * `--overwrite` to force the generator to overwrite the sitemap file if it already exists
-* `--whole-instance` will create a sitemap for the whole instance (otherwise you'll get a sitemap for the toots of the current user)
+* `--whole-instance` will create a sitemap for the whole instance (otherwise you'll get a sitemap for the toots of the current user), this sitemap will contain the latest toots from the local timeline and the distinct users who wrote it
 * and finally the file in which to store the sitemap (use `-` to print the sitemap to std out)
 
 To generate a sitemap you would for example call:

@@ -66,16 +66,21 @@ user = mstdn.account_verify_credentials();
 # start a sitemap
 sitemap = generator.Sitemap()
 # add the user's main page
+sitemap.add(args.instance,
+            changefreq="monthly",
+            priority="0.9")
 sitemap.add(user.url,
             changefreq="hourly",
             priority="1.0")
+
+users = [user.url]
 
 # collect first bunch of toots
 if args.whole_instance:
     toots = mstdn.timeline_local ();
 else:
     toots = mstdn.account_statuses (user.id);
-counter = 1
+counter = 2
 
 # iterate toots
 while toots and counter < args.max_urls:
@@ -87,6 +92,11 @@ while toots and counter < args.max_urls:
 		# add to sitemap
 		sitemap.add(toot.url, lastmod=toot.created_at.isoformat())
 		counter += 1
+		
+		if toot.account.url not in users:
+			users.append (toot.account.url)
+			sitemap.add(toot.account.url, priority = "0.9", changefreq="hourly")
+			counter += 1
 		
 		# break if we saw enough...
 		if counter >= args.max_urls:
