@@ -24,13 +24,9 @@ To install the dependencies using pip, you would need to call
 
 Of course, you need a Mastodon account... ;-)
 
-In that account, you need to create a new application.
-From the web backend click `Preferences` -> `Development` -> `new application` and give it a name and a website (doesn't actually matter..).
-It is sufficient to give it permissions to `read` and `read:statuses`, any other permissions (write, follow, ...)_are not required.
+In that account, you need to create a new application. From the web backend click `Preferences` -> `Development` -> `new application` and give it a name and a website (doesn't actually matter..). It is sufficient to give it permissions to `read` and `read:statuses`, any other permissions (write, follow, ...) are not required.
 
-Save the changes and click your new application.
-On the top of the applications page it will list some cryptic strings.
-For the sitemap generator you'll need `Your access token`.
+Save the changes and click your new application. On the top of the applications page it will list some cryptic strings. For the sitemap generator you'll need `Your access token`.
 
 
 ## Usage
@@ -55,6 +51,20 @@ To generate a sitemap you would for example call:
 and a few seconds later you'll hopefully find you sitemap with 50 urls (max) in `/tmp/sitemap.xml`!
 
 Put that in a cron job and your sitemap will stay up-to-date :)
+
+
+### Docker
+
+There is a Docker image available at [binfalse/mastodon-sitemap](https://hub.docker.com/r/binfalse/mastodon-sitemap/). It basically supports the same options, you just need to mount the destination directory into the container.
+
+To generate a sitemap in `/path/to/sitemap.xml` you would call:
+
+     docker run --rm -ti -v /path/to:/stuff binfalse/mastodon-sitemap
+                --instance https://mstdn.binfalse.de
+                --access-token f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2-
+                --overwrite
+                /stuff/sitemap.xml
+
 
 
 
