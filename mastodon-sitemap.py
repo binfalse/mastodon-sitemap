@@ -49,7 +49,7 @@ if args.max_urls < 1:
 	sys.exit (1)
 
 filename = args.file
-if filename is not "-" and os.path.isfile (filename) and not args.overwrite:
+if filename != "-" and os.path.isfile (filename) and not args.overwrite:
 	print ("sitemap " + args.file + " exists, will not overwrite it")
 	sys.exit (1)
 
@@ -120,7 +120,7 @@ while toots and counter < args.max_urls:
 sitemap_xml = sitemap.generate()
 
 # export sitemap
-if filename is "-":
+if filename == "-":
 	print (sitemap_xml)
 else:
 	with open (filename, 'w') as f:
