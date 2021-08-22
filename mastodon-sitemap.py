@@ -87,7 +87,7 @@ counter = 2
 while toots and counter < args.max_urls:
 	for toot in toots:
 		# only consider public toots
-		if toot.reblog or toot.visibility != "public":
+		if toot.reblog or toot.visibility != "public" or toot.account.locked:
 			continue
 		
 		# find when it was last modified
